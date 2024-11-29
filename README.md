@@ -1,7 +1,7 @@
 # Makeup Product Matcher
 ---
 ### Deskripsi
-Program ini adalah aplikasi sederhana yang memberikan rekomendasi produk makeup berdasarkan input dari pengguna mengenai jenis kulit, undertone, preferensi warna bibir, dan jenis produk makeup yang diinginkan (foundation, bedak, lip tint, atau lipstick). 
+Program ini adalah aplikasi sederhana yang memberikan rekomendasi produk makeup berdasarkan input dari pengguna mengenai jenis kulit, undertone, preferensi warna bibir, dan jenis produk makeup yang diinginkan (foundation, bedak, atau lip tint). 
 
 ### Fitur
 - Rekomendasi produk makeup berdasarkan merek dan kategori.
@@ -15,7 +15,7 @@ Program ini adalah aplikasi sederhana yang memberikan rekomendasi produk makeup 
    - Jenis kulit: (berminyak, kering, kombinasi)
    - Undertone: (cool, warm, neutral)
    - Preferensi warna bibir: (mauve, merah, nude, dll.)
-   - Jenis produk makeup yang diinginkan: (foundation, bedak, lip tint, lipstick)
+   - Jenis produk makeup yang diinginkan: (foundation, bedak, lip tint)
 3. Program akan menampilkan rekomendasi produk makeup yang sesuai dengan input.
 4. Pilih apakah ingin mencoba rekomendasi baru atau mengakhiri program.
 
