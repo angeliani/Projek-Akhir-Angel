@@ -1,157 +1,268 @@
 import java.util.Scanner;
 
-public class MakeupMatcherAngell {
+public class MakeupMatcherAngel {
 
-    static String[] foundationAngell = {
-        "TIRTIR Cushion Shade 17C Ivory Cool",
-        "TIRTIR Cushion Shade 21N Light Neutral",
-        "TIRTIR Cushion Shade 23W Medium Warm",
-        "TIRTIR Cushion Shade 25C Tan Cool",
-        "TIRTIR Cushion Shade 27N Deep Neutral"
+    static String[][] foundationAngell = {
+        {"Light", "Cool", "Oily", "Light", "TIRTIR Cushion Shade 17C Ivory Cool"},
+        {"Medium", "Cool", "Oily", "Medium", "TIRTIR Cushion Shade 21C Soft Cool"},
+        {"Tan", "Cool", "Dry", "Full Coverage", "TIRTIR Cushion Shade 23C Cool Tan"},
+        {"Deep", "Cool", "Combination", "Medium", "TIRTIR Cushion Shade 27C Deep Cool"},
+        {"Light", "Warm", "Oily", "Light", "TIRTIR Cushion Shade 18W Warm Ivory"},
+        {"Medium", "Warm", "Dry", "Medium", "TIRTIR Cushion Shade 22W Warm Light"},
+        {"Tan", "Warm", "Combination", "Full Coverage", "TIRTIR Cushion Shade 25W Warm Tan"},
+        {"Deep", "Warm", "Oily", "Full Coverage", "TIRTIR Cushion Shade 27W Deep Warm"},
+        {"Light", "Neutral", "Dry", "Light", "TIRTIR Cushion Shade 21N Neutral Light"},
+        {"Medium", "Neutral", "Combination", "Medium", "TIRTIR Cushion Shade 23N Neutral Medium"},
+        {"Tan", "Neutral", "Oily", "Full Coverage", "TIRTIR Cushion Shade 25N Neutral Tan"},
+        {"Deep", "Neutral", "Combination", "Medium", "TIRTIR Cushion Shade 27N Neutral Deep"}
     };
 
-    static String[] bedakAngell = {
-        "Laura Mercier Translucent Setting Powder",
-        "Maybelline Fit Me Loose Finishing Powder Shade Fair Light",
-        "Innisfree No-Sebum Mineral Powder",
-        "NARS Light Reflecting Setting Powder",
-        "Fenty Beauty Pro Filt'r Instant Retouch Setting Powder Shade Butter"
+    static String[][] bedakAngell = {
+        {"Oily", "Light", "Laura Mercier Translucent Setting Powder"},
+        {"Dry", "Medium", "Maybelline Fit Me Loose Finishing Powder Shade Fair Light"},
+        {"Combination", "Deep", "Innisfree No-Sebum Mineral Powder"},
+        {"Dry", "Tan", "NARS Light Reflecting Setting Powder"},
+        {"Oily", "Medium", "Fenty Beauty Pro Filt'r Instant Retouch Setting Powder Shade Butter"},
+        {"Combination", "Medium", "Huda Beauty Easy Bake Powder Shade Banana"},
+        {"Dry", "Light", "Charlotte Tilbury Airbrush Flawless Finish Powder"},
+        {"Oily", "Medium", "Tarte Shape Tape Setting Powder"},
+        {"Combination", "Light", "KVD Lock-It Setting Powder"}
     };
 
-    static String[] lipTintAngell = {
-        "Peripera Ink Velvet Lip Tint Shade 01 Good Brick",
-        "Rom&nd Juicy Lasting Tint Shade 06 Fig Fig",
-        "Etude House Dear Darling Water Tint Shade 02 Strawberry Ade",
-        "3CE Velvet Lip Tint Shade Going Right",
-        "The Saem Saemmul Real Tint Shade Red"
-    };
-
-    static String[] lipstickAngell = {
-        "MAC Matte Lipstick Shade Ruby Woo",
-        "YSL Rouge Pur Couture Shade 70 Le Nu",
-        "Maybelline SuperStay Matte Ink Shade Lover",
-        "Chanel Rouge Allure Velvet Shade 58 Rouge Vie",
-        "Dior Addict Lip Glow Shade 001 Pink"
+    static String[][] lipTintAngell = {
+        {"Dark", "Red", "Oily", "Peripera Ink Velvet Lip Tint Shade 01 Good Brick"},
+        {"Bright", "Pink", "Dry", "Etude House Dear Darling Water Tint Shade 02 Strawberry Ade"},
+        {"Medium", "Mauve", "Combination", "Rom&nd Juicy Lasting Tint Shade 06 Fig Fig"},
+        {"Bright", "Coral", "Oily", "3CE Velvet Lip Tint Shade Going Right"},
+        {"Deep", "Red Wine", "Dry", "The Saem Saemmul Real Tint Shade Red"},
+        {"Light", "Peach", "Combination", "Tony Moly Delight Lip Tint Shade 01 Peach"},
+        {"Medium", "Berry", "Dry", "Peripera Ink The Airy Velvet Lip Tint Shade 10"},
+        {"Bright", "Orange", "Combination", "Innisfree Vivid Cotton Ink Shade 17 Tangerine"}
     };
 
     public static void main(String[] args) {
-        Scanner angelScanner = new Scanner(System.in);
-        String cobaLagiAngell;
+        Scanner userInput = new Scanner(System.in);
+        String tryAgain;
 
         printSeparator();
         System.out.println(">.< + .` * Welcome to Angel's Makeup Matcher! * `. + >.<");
         printSeparator();
 
         do {
-            String jenisKulitAngell = getJenisKulitAngell(angelScanner);
-            String undertoneAngell = getUndertoneAngell(angelScanner);
-            String preferensiCoverage = getPreferensiCoverage(angelScanner); 
-            String warnaBibirAngell = getWarnaBibirAngell(angelScanner);
-            String produkAngell = getProdukAngell(angelScanner);
+            String productType = getProductType(userInput);
 
-            rekomendasiProdukAngell(jenisKulitAngell, undertoneAngell, preferensiCoverage, warnaBibirAngell, produkAngell);
+            switch (productType) {
+                case "Foundation":
+                    handleFoundation(userInput);
+                    break;
+                case "Bedak":
+                    handlePowder(userInput);
+                    break;
+                case "Lip Tint":
+                    handleLipTint(userInput);
+                    break;
+                default:
+                    System.out.println("Maaf aku gak ngenalin produk ini :()");
+            }
 
-            System.out.println();
-            System.out.println(">>> Apakah kamu mau mencoba lagi? ^-^ (yes/no) <<<");
-            cobaLagiAngell = angelScanner.next();
+            System.out.println("\n>>> Apakah kamu ingin mencoba lagi? ^-^ (ya/tidak) <<<");
+            tryAgain = userInput.next();
 
-        } while (cobaLagiAngell.equalsIgnoreCase("yes"));
+        } while (tryAgain.equalsIgnoreCase("ya"));
 
-        System.out.println("======================================================================");
-        System.out.println("<3 * . + Terima kasih sudah menggunakan Makeup Matcher Angel! + . * <3");
-        System.out.println("======================================================================");
+        System.out.println("================================================================");
+        System.out.println("<3 * . + Terima kasih sudah menggunakan Makeup Matcher! + . * <3");
+        System.out.println("================================================================");
 
-        angelScanner.close();
+        userInput.close();
     }
 
     public static void printSeparator() {
         System.out.println("========================================================");
     }
 
-    public static String getJenisKulitAngell(Scanner angelScanner) {
-        System.out.println("\n--> Apa jenis kulitmu? ^-^ ");
-        System.out.println("1. Berminyak (sering berkilau dan berminyak)");
-        System.out.println("2. Kering (sering merasa kering dan terlihat bersisik)");
-        System.out.println("3. Kombinasi (berminyak di area T-zone dan kering di area lainnya)");
-        System.out.print("Masukkan pilihan (1-3): ");
-        int pilihanAngell = angelScanner.nextInt();
-        return (pilihanAngell == 1) ? "Berminyak" : (pilihanAngell == 2) ? "Kering" : "Kombinasi";
-    }
-
-    public static String getUndertoneAngell(Scanner angelScanner) {
-        System.out.println("\n--> Apa undertonemu? ^.^");
-        System.out.println("1. Cool (kulit terlihat lebih pink atau merah)");
-        System.out.println("2. Warm (kulit terlihat lebih kuning atau emas)");
-        System.out.println("3. Neutral (campuran pink dan kuning)");
-        System.out.print("Masukkan pilihan (1-3): ");
-        int pilihanAngell = angelScanner.nextInt();
-        return (pilihanAngell == 1) ? "Cool" : (pilihanAngell == 2) ? "Warm" : "Neutral";
-    }
-
-    public static String getPreferensiCoverage(Scanner angelScanner) {
-        System.out.println("\n--> Seberapa tebal kamu suka foundationmu? ^~^");
-        System.out.println("1. Ringan (cocok untuk tampilan natural sehari-hari)");
-        System.out.println("2. Sedang (cocok untuk menutupi noda kecil tapi tetap terlihat natural)");
-        System.out.println("3. Full Coverage (cocok untuk menutupi semuanya, cocok untuk acara-acara khusus)");
-        System.out.print("Masukkan pilihan (1-3): ");
-        int pilihanAngell = angelScanner.nextInt();
-        return (pilihanAngell == 1) ? "Ringan" : (pilihanAngell == 2) ? "Sedang" : "Full Coverage";
-    }
-
-    public static String getWarnaBibirAngell(Scanner angelScanner) {
-        System.out.println("\n--> Apa preferensi warna bibirmu? ^o^");
-        System.out.println("1. Mauve (warna ungu lembut)");
-        System.out.println("2. Merah (warna merah terang)");
-        System.out.println("3. Nude (warna lembut seperti kulit)");
-        System.out.print("Masukkan pilihan (1-3): ");
-        int pilihanAngell = angelScanner.nextInt();
-        return (pilihanAngell == 1) ? "Mauve" : (pilihanAngell == 2) ? "Merah" : "Nude";
-    }
-
-    public static String getProdukAngell(Scanner angelScanner) {
-        System.out.println("\n--> Produk apa yang kamu cari? :]");
+    public static String getProductType(Scanner userInput) {
+        System.out.println("\n--> Produk apa yang kamu cari? ^o^ ");
         System.out.println("1. Foundation");
         System.out.println("2. Bedak");
         System.out.println("3. Lip Tint");
-        System.out.println("4. Lipstick");
-        System.out.print("Masukkan pilihan (1-4): ");
-        int pilihanAngell = angelScanner.nextInt();
-        switch (pilihanAngell) {
+        System.out.print("Masukkan pilihanmu (1-3): ");
+        int choice = userInput.nextInt();
+        switch (choice) {
             case 1:
                 return "Foundation";
             case 2:
                 return "Bedak";
             case 3:
                 return "Lip Tint";
-            case 4:
-                return "Lipstick";
             default:
-                return "Produk Tidak Diketahui";
+                System.out.println("Pilihan tidak valid :/");
+                return "Unknown";
         }
     }
 
-    public static void rekomendasiProdukAngell(String jenisKulitAngell, String undertoneAngell, String preferensiCoverage, String warnaBibirAngell, String produkAngell) {
-        printSeparator();
-        System.out.println("Mencocokkan pilihanmu... (^~^)/ ");
-        System.out.println("Jenis Kulit: " + jenisKulitAngell);
-        System.out.println("Undertone: " + undertoneAngell);
-        System.out.println("Preferensi Coverage: " + preferensiCoverage);
-        System.out.println("Warna Bibir: " + warnaBibirAngell);
-        System.out.println("Produk yang Dicari: " + produkAngell);
-        printSeparator();
+    public static String getSkinTone(int index) {
+        return switch (index) {
+            case 0 -> "Light";
+            case 1 -> "Medium";
+            case 2 -> "Tan";
+            case 3 -> "Deep";
+            default -> "Unknown";
+        };
+    }
 
-        String[] produkTerpilihAngell;
-        if (produkAngell.equals("Foundation")) {
-            produkTerpilihAngell = foundationAngell;
-        } else if (produkAngell.equals("Bedak")) {
-            produkTerpilihAngell = bedakAngell;
-        } else if (produkAngell.equals("Lip Tint")) {
-            produkTerpilihAngell = lipTintAngell;
-        } else {
-            produkTerpilihAngell = lipstickAngell;
+    public static String getUndertone(int index) {
+        return switch (index) {
+            case 0 -> "Cool";
+            case 1 -> "Warm";
+            case 2 -> "Neutral";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getSkinType(int index) {
+        return switch (index) {
+            case 0 -> "Oily";
+            case 1 -> "Dry";
+            case 2 -> "Combination";
+            default -> "Unknown";
+        };
+    }
+
+    public static void handleFoundation(Scanner userInput) {
+        System.out.println("\n--> Apa warna kulitmu? ^v^");
+        System.out.println("1. Light");
+        System.out.println("2. Medium");
+        System.out.println("3. Tan");
+        System.out.println("4. Deep");
+        System.out.print("Masukkan pilihanmu (1-4): ");
+        int skinToneIndex = userInput.nextInt() - 1;
+
+        System.out.println("\n--> Apa undertone kulitmu? ^.^");
+        System.out.println("1. Cool");
+        System.out.println("2. Warm");
+        System.out.println("3. Neutral");
+        System.out.print("Masukkan pilihanmu (1-3): ");
+        int undertoneIndex = userInput.nextInt() - 1;
+
+        System.out.println("\n--> Apa jenis kulitmu? ^~^");
+        System.out.println("1. Oily");
+        System.out.println("2. Dry");
+        System.out.println("3. Combination");
+        System.out.print("Masukkan pilihanmu (1-3): ");
+        int skinTypeIndex = userInput.nextInt() - 1;
+
+        System.out.println("\n--> Seberapa besar coverage yang kamu inginkan? ^V^");
+        System.out.println("1. Light");
+        System.out.println("2. Medium");
+        System.out.println("3. Full Coverage");
+        System.out.print("Masukkan pilihanmu (1-3): ");
+        int coverageIndex = userInput.nextInt() - 1;
+
+        for (String[] product : foundationAngell) {
+            if (product[0].equalsIgnoreCase(getSkinTone(skinToneIndex)) &&
+                product[1].equalsIgnoreCase(getUndertone(undertoneIndex)) &&
+                product[2].equalsIgnoreCase(getSkinType(skinTypeIndex)) &&
+                product[3].equalsIgnoreCase(getCoverage(coverageIndex))) {
+                System.out.println("\nRekomendasi Foundation: " + product[4]);
+                return;
+            }
         }
+        System.out.println("Maaf, aku belum menemukan produk yang cocok :[");
+    }
 
-        int indexRandomAngell = (int) (Math.random() * produkTerpilihAngell.length);
-        System.out.println("Rekomendasi produk: " + produkTerpilihAngell[indexRandomAngell] + " (^o^)/ ");
+    public static String getCoverage(int index) {
+        return switch (index) {
+            case 0 -> "Light";
+            case 1 -> "Medium";
+            case 2 -> "Full Coverage";
+            default -> "Unknown";
+        };
+    }
+
+    public static void handlePowder(Scanner userInput) {
+        System.out.println("\n--> Apa jenis kulitmu? ^o^");
+        System.out.println("1. Oily");
+        System.out.println("2. Dry");
+        System.out.println("3. Combination");
+        System.out.print("Masukkan pilihanmu (1-3): ");
+        int skinTypeIndex = userInput.nextInt() - 1;
+
+        System.out.println("\n--> Apa warna kulitmu? ^-^");
+        System.out.println("1. Light");
+        System.out.println("2. Medium");
+        System.out.println("3. Deep");
+        System.out.print("Masukkan pilihanmu (1-3): ");
+        int toneIndex = userInput.nextInt() - 1;
+
+        for (String[] product : bedakAngell) {
+            if (product[0].equalsIgnoreCase(getSkinType(skinTypeIndex)) &&
+                product[1].equalsIgnoreCase(getSkinTone(toneIndex))) {
+                System.out.println("\nRekomendasi Bedak: " + product[2]);
+                return;
+            }
+        }
+        System.out.println("Maaf, aku belum menemukan produk yang cocok :[");
+    }
+
+    public static void handleLipTint(Scanner userInput) {
+        System.out.println("\n--> Apa warna dasar bibirmu? ^=^");
+        System.out.println("1. Dark");
+        System.out.println("2. Bright");
+        System.out.println("3. Medium");
+        System.out.print("Masukkan pilihanmu (1-3): ");
+        int lipBaseIndex = userInput.nextInt() - 1;
+
+        System.out.println("\n--> Apa warna lip tint yang kamu suka? ^u^");
+        System.out.println("1. Red");
+        System.out.println("2. Pink");
+        System.out.println("3. Mauve");
+        System.out.println("4. Coral");
+        System.out.println("5. Red Wine");
+        System.out.println("6. Peach");
+        System.out.println("7. Berry");
+        System.out.println("8. Orange");
+        System.out.print("Masukkan pilihanmu (1-8): ");
+        int lipColorIndex = userInput.nextInt() - 1;
+
+        System.out.println("\n--> Apa jenis kulitmu? ^.^");
+        System.out.println("1. Oily");
+        System.out.println("2. Dry");
+        System.out.println("3. Combination");
+        System.out.print("Masukkan pilihanmu (1-3): ");
+        int skinTypeIndex = userInput.nextInt() - 1;
+
+        for (String[] product : lipTintAngell) {
+            if (product[0].equalsIgnoreCase(getLipBase(lipBaseIndex)) &&
+                product[1].equalsIgnoreCase(getLipColor(lipColorIndex)) &&
+                product[2].equalsIgnoreCase(getSkinType(skinTypeIndex))) {
+                System.out.println("\nRekomendasi Lip Tint: " + product[3]);
+                return;
+            }
+        }
+        System.out.println("Maaf, aku belum menemukan produk yang cocok :[");
+    }
+
+    public static String getLipBase(int index) {
+        return switch (index) {
+            case 0 -> "Dark";
+            case 1 -> "Bright";
+            case 2 -> "Medium";
+            default -> "Unknown";
+        };
+    }
+
+    public static String getLipColor(int index) {
+        return switch (index) {
+            case 0 -> "Red";
+            case 1 -> "Pink";
+            case 2 -> "Mauve";
+            case 3 -> "Coral";
+            case 4 -> "Red Wine";
+            case 5 -> "Peach";
+            case 6 -> "Berry";
+            case 7 -> "Orange";
+            default -> "Unknown";
+        };
     }
 }
